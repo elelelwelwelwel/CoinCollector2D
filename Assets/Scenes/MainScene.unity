@@ -2818,6 +2818,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4870524411119199016, guid: e901accb26608c942bf72a691e782425, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 890a0221adddd814587ad7db5f931828, type: 2}
     - target: {fileID: 7333247152596560358, guid: e901accb26608c942bf72a691e782425, type: 3}
       propertyPath: m_Name
       value: Coin
