@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
 
             // Jika lampu Anda secara default mengarah ke atas (sumbu Y positif),
             // kurangi sudut sebesar 90 derajat agar arahnya pas:
-            // sudut -= 90f; 
+            sudut -= 90f; 
 
             // Terapkan rotasi pada sumbu Z
             spotLight2D.rotation = Quaternion.Euler(0, 0, sudut);
