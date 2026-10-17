@@ -1,23 +1,33 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using Unity.VisualScripting;
+using UnityEngine.EventSystems;
 
-public class ItemSlot : MonoBehaviour
+public class ItemSlot : MonoBehaviour, IPointerClickHandler
 {
     // Item Data
     public string itemName;
     public int itemQuantity;
     public Sprite itemIcon;
     public bool isFull;
-    
+
     // Item Slot
     [SerializeField] private TMP_Text quantityText;
-    
+
     [SerializeField] private Image itemImage;
     [SerializeField] private int maxStackSize = 99;
 
-   public void AddItem(ItemDetails item)
+    // Selecterd Item
+    [SerializeField] public GameObject selectedPanel;
+    public bool isItemSelected;
+
+    public InventoryManager inventoryManager;
+    public void Start()
+    {
+        inventoryManager = FindAnyObjectByType<InventoryManager>();
+    }
+
+    public void AddItem(ItemDetails item)
     {
         itemName = item.ItemName;
         // itemQuantity = item.Quantity;
@@ -29,10 +39,10 @@ public class ItemSlot : MonoBehaviour
         // quantityText.enabled = true;
         // itemImage.sprite = itemIcon;
     }
-    
+
     // check condition for stacking item in the same slot
     public bool CanStackWith(string otherItemName)
-    {   
+    {
         return !isFull && itemName == otherItemName;
     }
 
@@ -44,5 +54,30 @@ public class ItemSlot : MonoBehaviour
         quantityText.text = itemQuantity.ToString();
         quantityText.enabled = true;
         itemImage.sprite = itemIcon;
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {
+            LeftClick();
+        }
+
+        if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            RightClick();
+        }
+    }
+    private void LeftClick()
+    {
+        Debug.Log("Left Clicked on");
+        selectedPanel.SetActive(true);
+        isItemSelected = true;
+    }
+
+    private void RightClick()
+    {
+        inventoryManager.DesselectAllSlot();
+        Debug.Log("Right Clicked on");
     }
 }
